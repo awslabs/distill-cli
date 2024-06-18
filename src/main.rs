@@ -40,6 +40,7 @@ enum OutputType {
     Terminal,
     Text,
     Word,
+    Markdown,
 }
 
 #[::tokio::main]
@@ -208,6 +209,25 @@ async fn main() -> Result<()> {
             println!();
             println!("Summary:\n{}\n", summarized_text);
             println!("Transcription:\n{}\n", transcription);
+        }
+        OutputType::Markdown => {
+            let output_file_path_md = Path::new("summary.md");
+            let mut file = File::create(output_file_path_md)
+                .map_err(|e| anyhow::anyhow!("Error creating file: {}", e))?;
+
+            let summary_md = format!("# Summary\n\n{}", summarized_text);
+            let mut transcription_md = format!("\n\n# Transcription\n\n{}", transcription);
+            transcription_md = transcription_md.replace("spk_", "\nspk_");
+            let markdown_content = format!("{}{}", summary_md, transcription_md);
+
+            file.write_all(markdown_content.as_bytes())
+                .map_err(|e| anyhow::anyhow!("Error writing Markdown file: {}", e))?;
+
+            spinner.success("Done!");
+            println!(
+                "💾 Summary and transcription written to {}",
+                output_file_path_md.display()
+            );
         }
     }
 
