@@ -11,6 +11,8 @@ use aws_config::{Region, SdkConfig};
 use clap::Parser;
 use config::{Config, File as ConfigFile};
 use docx_rs::{Docx, Paragraph, Run};
+use reqwest::Client as ReqwestClient;
+use serde_json::json;
 use spinoff::{spinners, Color, Spinner};
 
 use aws_sdk_s3::primitives::ByteStream;
@@ -40,6 +42,7 @@ enum OutputType {
     Terminal,
     Text,
     Word,
+    Slack,
 }
 
 #[::tokio::main]
@@ -52,6 +55,10 @@ async fn main() -> Result<()> {
 
     let s3_bucket_name = settings
         .get_string("aws.s3_bucket_name")
+        .unwrap_or_default();
+
+    let slack_webhook_endpoint = settings
+        .get_string("slack.webhook_endpoint")
         .unwrap_or_default();
 
     let Opt {
@@ -208,6 +215,42 @@ async fn main() -> Result<()> {
             println!();
             println!("Summary:\n{}\n", summarized_text);
             println!("Transcription:\n{}\n", transcription);
+        }
+        OutputType::Slack => {
+            let client = ReqwestClient::new();
+
+            if slack_webhook_endpoint.is_empty() {
+                spinner.stop_and_persist(
+                    "⚠️",
+                    "Slack webhook endpoint is not configured. Skipping Slack notification.",
+                );
+                println!("Summary:\n{}\n", summarized_text);
+            } else {
+                let content = format!("A summarization job just completed:\n\n{}", summarized_text);
+                let payload = json!({
+                    "content": content
+                });
+                match client
+                    .post(slack_webhook_endpoint)
+                    .header("Content-Type", "application/json")
+                    .json(&payload)
+                    .send()
+                    .await
+                {
+                    Ok(response) => {
+                        if response.status().is_success() {
+                            spinner.success("Summary sent to Slack!");
+                        } else {
+                            spinner.stop_and_persist("❌", "Failed to send summary to Slack!");
+                            eprintln!("Error sending summary to Slack: {}", response.status());
+                        }
+                    }
+                    Err(err) => {
+                        spinner.stop_and_persist("❌", "Failed to send summary to Slack!");
+                        eprintln!("Error sending summary to Slack: {}", err);
+                    }
+                };
+            }
         }
     }
 
