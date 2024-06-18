@@ -37,7 +37,7 @@ Before using the Distill CLI, you'll need:
 ## Step 1: Clone the repo 
 
 ```bash
-git clone git@github.com:awslabs/distill-cli.git && cd git@github.com:awslabs/distill-cli.git
+git clone https://github.com/awslabs/distill-cli.git && cd distill-cli
 ```
 
 ## Step 2: Build from source
