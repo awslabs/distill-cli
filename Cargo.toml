@@ -1,0 +1,29 @@
+[package]
+name = "distill-cli"
+version = "0.1.0"
+edition = "2021"
+description = "Distill CLI can summarize an audio file (e.g., a meeting) using Amazon Transcribe and Amazon Bedrock."
+repository = "TBD"
+readme = "README.md"
+license = "Apache-2.0"
+include = ["src/**/*", "config.toml"]
+
+[dependencies]
+anyhow = "1.0.82"
+aws-config = { version = "1.1.7", features = ["behavior-version-latest" ] }
+aws-sdk-bedrockruntime = "1.23.0"
+aws-sdk-s3 = "1.24.0"
+aws-sdk-transcribe = "1.21.0"
+aws-types = "0.14.0"
+clap = { version = "4.5.4", features = ["derive"] }
+config = "0.13.3"
+console = "0.15.8"
+dialoguer = "0.11.0"
+docx-rs = "0.4.15"
+infer = "0.15.0"
+reqwest = "0.12.4"
+serde_json = "1.0.116"
+shellexpand = "3.1.0"
+spinoff = { version = "0.8.0", features = ["dots7"] }
+tokio = { version = "1", features = ["time", "macros", "rt-multi-thread"] }
+uuid = { version = "1.8.0", features = ["v4"] }

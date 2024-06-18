@@ -1,0 +1,55 @@
+# =============================================================================
+# AWS Settings
+# =============================================================================
+
+# You can explicitly set the bucket where generated summaries are written. 
+# If commented out, the CLI will prompt you to select a bucket, which is 
+# the preferred behavior as of publishing this.
+
+[aws]
+# s3_bucket_name = "silly_named_test_bucket"
+
+# =============================================================================
+# LLM Settings
+# =============================================================================
+
+# Standard settings for models consumed via Bedrock. 
+
+# By default, Distill CLI uses Claude 3 Sonnet from Anthropic.
+# For a full list of model IDs, see https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html  
+
+# For information about inference params, such as temperature, 
+# see https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html
+
+[model]
+model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
+max_tokens = 2000
+temperature = 1.0
+top_p = 0.999
+top_k = 40
+
+# =============================================================================
+# Anthropic Settings
+# =============================================================================
+
+# Anthropic models consumed via Bedrock require additional settings, including 
+# anthropic_version and system. For more information, 
+# see: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-anthropic-claude-messages.html
+
+# If you are not using an Anthropic model, comment out the lines below.
+
+[anthropic]
+anthropic_version = "bedrock-2023-05-31"
+system = "Your name is Distiller, and you are an AI assistant that excels at summarizing conversations."
+
+# =============================================================================
+# Prompt Settings
+# =============================================================================
+
+# This is the default prompt for audio summarization. 
+# Feel free to experiment with the prompt below and adjust for your use cases.
+
+[prompt]
+template = """
+Summarize the following transcript into one or more clear and readable paragraphs. There may be multiple speakers in this transcript. If so, speakers in the transcript could be denoted by their name, or by "spk_x", where `x` is a number. These represent distinct speakers in the conversation. When you refer to a speaker, you may refer to them by "Speaker 1" in the case of "spk_1", "Speaker 2" in the case of "spk_2", and so forth. When you summarize, capture any ideas discussed, any hot topics you identify, or any other interesting parts of the conversation between the speakers. At the end of your summary, give a bullet point list of the key action items, to-do's, and followup activities:
+"""
