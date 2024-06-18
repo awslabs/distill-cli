@@ -102,7 +102,7 @@ As this is a simple CLI, there are only a few options.
 | Option | Required | Description |
 | - | - | - |
 | `-i`, `--input-audio-file` | Yes | Specify the audio file to be summarized. | 
-| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`.  | 
+| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`.  | 
 | `-h`, `--help` | No | Provides help for the Distill CLI. |
 
 # Config settings
