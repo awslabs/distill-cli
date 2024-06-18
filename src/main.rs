@@ -58,10 +58,6 @@ async fn main() -> Result<()> {
         .get_string("aws.s3_bucket_name")
         .unwrap_or_default();
 
-    let slack_webhook_endpoint = settings
-        .get_string("slack.webhook_endpoint")
-        .unwrap_or_default();
-
     let Opt {
         input_audio_file,
         output_type,
@@ -238,6 +234,10 @@ async fn main() -> Result<()> {
         }
         OutputType::Slack => {
             let client = ReqwestClient::new();
+
+            let slack_webhook_endpoint = settings
+                .get_string("slack.webhook_endpoint")
+                .unwrap_or_default();
 
             if slack_webhook_endpoint.is_empty() {
                 spinner.stop_and_persist(
