@@ -187,5 +187,13 @@ To output a summary to a Slack channel, create a [Slack webhook](https://api.sla
 # =============================================================================
 
 [slack]
-# webhook_endpoint = "https://hooks.slack.com/workflows/XYZ/ABC/123"
+webhook_endpoint = "https://hooks.slack.com/workflows/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"
 ```
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This project is licensed under the Apache-2.0 License.
