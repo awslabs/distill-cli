@@ -182,7 +182,7 @@ $ aws bedrock list-foundation-models
 
 ### Slack
 
-To output a summary to a Slack channel, create a [Slack webhook](https://api.slack.com/messaging/webhooks), and update and uncomment the enpdoint in `config.toml`. If you do not set the endpoint, or if the endpoint is commented out, you'll receive the error "Slack webhook endpoint is not configured. Skipping Slack notification.".
+To output a summary to a Slack channel, create a [Slack webhook](https://api.slack.com/messaging/webhooks), then update and uncomment the endpoint in your `config.toml`. If you don't set the endpoint, or if the endpoint is commented out, you'll receive the error "Slack webhook endpoint is not configured. Skipping Slack notification.".
 
 ```
 ...
