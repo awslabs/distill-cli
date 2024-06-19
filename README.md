@@ -102,7 +102,11 @@ As this is a simple CLI, there are only a few options.
 | Option | Required | Description |
 | - | - | - |
 | `-i`, `--input-audio-file` | Yes | Specify the audio file to be summarized. | 
+<<<<<<< HEAD
 | `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`, `slack`  | 
+=======
+| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `slack`, `terminal`, `text`, `word`.  | 
+>>>>>>> 6a66e61c99e90491e65072dbfc190deebf8d6bb9
 | `-h`, `--help` | No | Provides help for the Distill CLI. |
 
 # Config settings
@@ -187,7 +191,7 @@ To output a summary to a Slack channel, create a [Slack webhook](https://api.sla
 # =============================================================================
 
 [slack]
-webhook_endpoint = "https://hooks.slack.com/workflows/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"
+# webhook_endpoint = "https://hooks.slack.com/workflows/XYZ/ABC/123"
 ```
 
 ## Security
