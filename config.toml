@@ -53,10 +53,3 @@ system = "Your name is Distiller, and you are an AI assistant that excels at sum
 template = """
 Summarize the following transcript into one or more clear and readable paragraphs. There may be multiple speakers in this transcript. If so, speakers in the transcript could be denoted by their name, or by "spk_x", where `x` is a number. These represent distinct speakers in the conversation. When you refer to a speaker, you may refer to them by "Speaker 1" in the case of "spk_1", "Speaker 2" in the case of "spk_2", and so forth. When you summarize, capture any ideas discussed, any hot topics you identify, or any other interesting parts of the conversation between the speakers. At the end of your summary, give a bullet point list of the key action items, to-do's, and followup activities:
 """
-
-# =============================================================================
-# Slack Integration
-# =============================================================================
-
-[slack]
-# webhook_endpoint = "https://hooks.slack.com/workflows/XYZ/ABC/123"
