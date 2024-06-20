@@ -19,7 +19,8 @@ use dialoguer::{theme::ColorfulTheme, Select};
 
 #[derive(Debug, Parser)]
 #[clap(
-    about = "Distill CLI can summarize an audio file (e.g., a meeting) using Amazon Transcribe and Amazon Bedrock."
+    about = "Distill CLI can summarize an audio file (e.g., a meeting) using Amazon Transcribe and Amazon Bedrock.",
+    after_help = "For supported languages, consult: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html"
 )]
 struct Opt {
     #[clap(short, long)]
@@ -33,6 +34,9 @@ struct Opt {
         ignore_case = true
     )]
     output_type: OutputType,
+
+    #[clap(short, long, default_value = "en-US")]
+    language_code: String,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, clap::ValueEnum)]
@@ -58,6 +62,7 @@ async fn main() -> Result<()> {
     let Opt {
         input_audio_file,
         output_type,
+        language_code,
     } = Opt::parse();
 
     let s3_client = Client::new(&config);
@@ -156,7 +161,7 @@ async fn main() -> Result<()> {
 
     // Transcribe the audio
     let transcription =
-        transcribe::transcribe_audio(&regional_config, file_path, &s3_uri, &mut spinner).await?;
+        transcribe::transcribe_audio(&regional_config, file_path, &s3_uri, &mut spinner, &language_code).await?;
 
     // Summarize the transcription
     spinner.update(spinners::Dots7, "Summarizing text...", None);
