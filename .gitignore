@@ -1,2 +1,12 @@
+Cargo.lock
+.DS_Store
+/target
+*.wav
+*.mp4
+*.mp3
+*.m4a
+*.txt
+*.docx
+*.md
 target
 *.lock

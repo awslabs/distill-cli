@@ -106,7 +106,7 @@ As this is a simple CLI, there are only a few options.
 | Option | Required | Description |
 | - | - | - |
 | `-i`, `--input-audio-file` | Yes | Specify the audio file to be summarized. | 
-| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`.  |
+| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`, `slack`  |
 | `-l`, `--language-code` | No | Input language code. Default is en-US.<br> **Accepted values**: Check: [Amazon Transcribe Supported Languages Documentation](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) | 
 | `-h`, `--help` | No | Provides help for the Distill CLI. |
 
@@ -178,3 +178,27 @@ $ aws bedrock list-foundation-models
     ]
 }
 ```
+
+## Additional output settings
+
+### Slack
+
+To output a summary to a Slack channel, create a [Slack webhook](https://api.slack.com/messaging/webhooks), then update and uncomment the endpoint in your `config.toml`. If you don't set the endpoint, or if the endpoint is commented out, you'll receive the error "Slack webhook endpoint is not configured. Skipping Slack notification.".
+
+```
+...
+# =============================================================================
+# Slack Integration
+# =============================================================================
+
+[slack]
+# webhook_endpoint = "https://hooks.slack.com/workflows/XYZ/ABC/123"
+```
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This project is licensed under the Apache-2.0 License.

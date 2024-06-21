@@ -37,11 +37,23 @@ pub async fn transcribe_audio(
             "audio/wav" => MediaFormat::Wav,
             "audio/webm" => MediaFormat::Webm,
             _ => {
-                bail!("\nUnsupported media format: {}", kind.mime_type());
+                // Fallback to checking the file extension (MP3s sometimes cause issues)
+                match file_path.extension().and_then(|ext| ext.to_str()) {
+                    Some("mp3") => MediaFormat::Mp3,
+                    _ => {
+                        bail!("\nUnsupported media format: {}", kind.mime_type());
+                    }
+                }
             }
         },
         Ok(None) => {
-            bail!("\nUnable to determine media format from file extension");
+            // Fallback to checking the file extension
+            match file_path.extension().and_then(|ext| ext.to_str()) {
+                Some("mp3") => MediaFormat::Mp3,
+                _ => {
+                    bail!("\nUnable to determine media format from file extension");
+                }
+            }
         }
         Err(err) => {
             bail!("\nError determining media format: {}", err);
