@@ -6,6 +6,10 @@ The Distill CLI uses Amazon Transcribe and Amazon Bedrock to create summaries of
 
 Like the [Amazon Bedrock Audio Summarizer](https://github.com/aws-samples/amazon-bedrock-audio-summarizer), the Distill CLI takes a dependency on Amazon Transcribe, and as such, supports the following [media formats](https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio): AMR, FLAC, M4A, MP3, MP4, Ogg, WebM, WAV.
 
+# Language Support
+
+Distill CLI supports configurable language codes for transcription using Amazon Transcribe. Specify the language of the audio file with the --language-code or -l parameter (e.g., --language-code es-US for Spanish). If no language code is provided, it defaults to English (United States) (en-US). For a list of supported languages and their codes, see the [Amazon Transcribe Supported Languages Documentation](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). Use --help for more information on available options. The prompt in the provided config.toml is adjusted so that the provided output matches the language in the transcript.
+
 # A note on regions
 
 By default, the Distill CLI inherits credentials and configuration details from the AWS CLI. Since Bedrock is not yet available in every region, ensure that the default region in your AWS config is on the list of [supported Bedrock regions](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html). 
@@ -102,7 +106,8 @@ As this is a simple CLI, there are only a few options.
 | Option | Required | Description |
 | - | - | - |
 | `-i`, `--input-audio-file` | Yes | Specify the audio file to be summarized. | 
-| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`, `slack`  | 
+| `-o`, `--output-type` | No | Specify the output format of the summary. Default is terminal.<br> **Accepted values**: `terminal`, `text`, `word`, `markdown`, `slack`  |
+| `-l`, `--language-code` | No | Input language code. Default is en-US.<br> **Accepted values**: Check: [Amazon Transcribe Supported Languages Documentation](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html) | 
 | `-h`, `--help` | No | Provides help for the Distill CLI. |
 
 # Config settings

@@ -8,3 +8,5 @@ Cargo.lock
 *.txt
 *.docx
 *.md
+target
+*.lock
