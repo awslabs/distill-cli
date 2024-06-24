@@ -7,7 +7,7 @@
 # the preferred behavior as of publishing this.
 
 [aws]
-# s3_bucket_name = "s3://testuswest2nnn"
+# s3_bucket_name = "silly_named_test_bucket"
 
 # =============================================================================
 # LLM Settings
@@ -60,4 +60,3 @@ Summarize the following transcript into one or more clear and readable paragraph
 
 [slack]
 # webhook_endpoint = "https://hooks.slack.com/workflows/XYZ/ABC/123"
-
