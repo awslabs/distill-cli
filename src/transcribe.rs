@@ -34,6 +34,7 @@ pub async fn transcribe_audio(
             "audio/mp4" => MediaFormat::Mp4,
             "video/mp4" => MediaFormat::Mp4,
             "audio/ogg" => MediaFormat::Ogg,
+            "audio/opus" => MediaFormat::Ogg,
             "audio/wav" => MediaFormat::Wav,
             "audio/webm" => MediaFormat::Webm,
             _ => {
