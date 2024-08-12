@@ -39,6 +39,9 @@ struct Opt {
 
     #[clap(short, long, default_value = "en-US")]
     language_code: String,
+
+    #[clap(short, long, default_value = "n")]
+    delete_s3_object: String,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, clap::ValueEnum)]
@@ -66,6 +69,7 @@ async fn main() -> Result<()> {
         input_audio_file,
         output_type,
         language_code,
+        delete_s3_object,
     } = Opt::parse();
 
     let s3_client = Client::new(&config);
@@ -163,8 +167,14 @@ async fn main() -> Result<()> {
     spinner.update(spinners::Dots7, "Summarizing text...", None);
 
     // Transcribe the audio
-    let transcription =
-        transcribe::transcribe_audio(&regional_config, file_path, &s3_uri, &mut spinner, &language_code).await?;
+    let transcription: String = transcribe::transcribe_audio(
+        &regional_config,
+        file_path,
+        &s3_uri,
+        &mut spinner,
+        &language_code,
+    )
+    .await?;
 
     // Summarize the transcription
     spinner.update(spinners::Dots7, "Summarizing text...", None);
@@ -277,6 +287,16 @@ async fn main() -> Result<()> {
                 };
             }
         }
+    }
+
+    // After processing, check if the user wants to delete the S3 object
+    if delete_s3_object == "Y" {
+        s3_client
+            .delete_object()
+            .bucket(&bucket_name)
+            .key(&file_name)
+            .send()
+            .await?;
     }
 
     Ok(())
