@@ -9,11 +9,13 @@ license = "Apache-2.0"
 include = ["src/**/*", "config.toml"]
 
 [dependencies]
+log = "0.4.22"
+env_logger = "0.11.5"
 anyhow = "1.0.82"
-aws-config = { version = "1.1.7", features = ["behavior-version-latest" ] }
-aws-sdk-bedrockruntime = "1.23.0"
-aws-sdk-s3 = "1.24.0"
-aws-sdk-transcribe = "1.21.0"
+aws-config = { version = "1.5.5", features = ["behavior-version-latest" ] }
+aws-sdk-bedrockruntime = "1.44.0"
+aws-sdk-s3 = "1.44.0"
+aws-sdk-transcribe = "1.39.0"
 aws-types = "0.14.0"
 clap = { version = "4.5.4", features = ["derive"] }
 config = "0.13.3"
