@@ -12,7 +12,7 @@ Distill CLI supports configurable language codes for transcription using Amazon 
 
 # S3 Object Deletion
 
-Distill CLI supports deletion of the audio recodings once transcribe and summarize activities performed with success. By using the `--delete-s3-object` or `-d` parameter (e.g., `--delete-s3-object Y`), the audio file previously uploaded onto Amazon S3 will be deleted. Use `--help` for more information on available options.
+Distill CLI supports the deletion of audio recordings after transcription and summarization activities have completed. Using the `--delete-s3-object` or `-d` parameter (e.g., `--delete-s3-object Y`), the audio file previously uploaded onto Amazon S3 will be deleted. Use `--help` for more information on available options.
 
 # A note on regions
 
