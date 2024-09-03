@@ -8,6 +8,7 @@ use std::path::Path;
 use anyhow::{bail, Context, Result};
 use aws_config::meta::region::RegionProviderChain;
 use aws_config::{Region, SdkConfig};
+use aws_sdk_s3::config::StalledStreamProtectionConfig;
 use clap::Parser;
 use config::{Config, File as ConfigFile};
 use docx_rs::{Docx, Paragraph, Run};
@@ -55,6 +56,7 @@ enum OutputType {
 
 #[::tokio::main]
 async fn main() -> Result<()> {
+    env_logger::init();
     let config = load_config(None).await;
 
     let settings = Config::builder()
@@ -311,6 +313,14 @@ async fn load_config(region: Option<Region>) -> SdkConfig {
             config = config.region(RegionProviderChain::default_provider().or_else("us-east-1"))
         }
     }
+
+    // Resolves issues with uploading large S3 files
+    // See https://github.com/awslabs/aws-sdk-rust/issues/1146
+    config = config
+        .stalled_stream_protection(
+            StalledStreamProtectionConfig::disabled()
+        );
+
     config.load().await
 }
 
