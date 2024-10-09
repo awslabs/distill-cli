@@ -8,7 +8,7 @@ Like the [Amazon Bedrock Audio Summarizer](https://github.com/aws-samples/amazon
 
 # Language Support
 
-Distill CLI supports configurable language codes for transcription using Amazon Transcribe. Specify the language of the audio file with the `--language-code` or `-l` parameter (e.g., `--language-code es-US` for Spanish). If no language code is provided, it defaults to English (United States) (`en-US`). For a list of supported languages and their codes, see the [Amazon Transcribe Supported Languages Documentation](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). Use `--help` for more information on available options. The prompt in the provided config.toml is adjusted so that the provided output matches the language in the transcript.
+Distill CLI supports configurable language codes for transcription using Amazon Transcribe. Specify the language of the audio file with the `--language-code` or `-l` parameter, e.g., `--language-code es-US` for Spanish (United States). If no language code is provided, it defaults to English (United States) (`en-US`). For a list of supported languages and their codes, see the [Amazon Transcribe Supported Languages Documentation](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). Use `--help` for more information on available options. The prompt in the provided config.toml is adjusted so that the provided output matches the language in the transcript.f
 
 # S3 Object Deletion
 
